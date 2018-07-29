@@ -2,7 +2,7 @@
 
 Having fun with Flutter.
 
-![RandomMet Flutter](./resources/randommet-flutter.git)
+![RandomMet Flutter](./resources/randommet-flutter.gif)
 
 ## Getting Started
 
