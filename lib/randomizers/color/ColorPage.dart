@@ -10,8 +10,8 @@ class ColorPage extends StatelessWidget {
     ColorVM oracleVM = getIt<ColorVM>();
     return SwapAnimator(
       onSwap: () => oracleVM.choose(),
-      builder: (BuildContext context, Animation<double> animation,
-          VoidCallback startAnimation) {
+      builder: (BuildContext context, Animation<double> animation, TickerProvider tickerProvider,
+          VoidCallback startAnimation,) {
         return StreamBuilder<ColorState>(
             stream: oracleVM.state$,
             initialData: ColorVM.initialState,
@@ -22,6 +22,7 @@ class ColorPage extends StatelessWidget {
                 animation: animation,
                 backgroundColor: snap.data.chosen.color,
                 title: 'Color',
+                tickerProvider: tickerProvider,
               );
             });
       },

@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-typedef SwapAnimatorBuilder = Widget Function(BuildContext context, Animation<double> animation, VoidCallback startAnimation);
+typedef SwapAnimatorBuilder = Widget Function(BuildContext context, Animation<double> animation, TickerProvider tickerProvider, VoidCallback startAnimation);
 
 class SwapAnimator extends StatefulWidget {
   final VoidCallback onSwap;
@@ -28,7 +28,7 @@ class _SwapAnimatorState extends State<SwapAnimator> with TickerProviderStateMix
     final animation = Tween(begin: 1.0, end: 0.0).animate(new CurvedAnimation(
         parent: animationController, curve: Curves.elasticIn
     ));
-    return widget.builder(context, animation, _startAnimation);
+    return widget.builder(context, animation, this, _startAnimation);
   }
 
   @override

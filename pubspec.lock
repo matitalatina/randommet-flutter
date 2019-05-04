@@ -8,6 +8,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.36.3"
+  animated_background:
+    dependency: "direct main"
+    description:
+      name: animated_background
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   archive:
     dependency: transitive
     description:

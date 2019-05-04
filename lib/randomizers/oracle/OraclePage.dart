@@ -11,7 +11,7 @@ class OraclePage extends StatelessWidget {
     OracleVM oracleVM = getIt<OracleVM>();
     return SwapAnimator(
       onSwap: () => oracleVM.choose(),
-      builder: (BuildContext context, Animation<double> animation,
+      builder: (BuildContext context, Animation<double> animation, TickerProvider tickerProvider,
           VoidCallback startAnimation) {
         return StreamBuilder<OracleState>(
             stream: oracleVM.response$,
@@ -23,6 +23,7 @@ class OraclePage extends StatelessWidget {
                 animation: animation,
                 backgroundColor: snap.data.color,
                 title: 'Oracle',
+                tickerProvider: tickerProvider,
               );
             });
       },
