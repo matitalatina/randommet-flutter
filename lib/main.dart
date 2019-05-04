@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:randommet2/randomizers/color/ColorVM.dart';
+import 'package:randommet2/randomizers/item/ItemVM.dart';
 import 'package:randommet2/randomizers/oracle/OracleVM.dart';
 import 'package:randommet2/pages/TabsPage.dart';
 
@@ -9,6 +10,7 @@ GetIt getIt = new GetIt();
 void main() {
   getIt.registerSingleton<OracleVM>(OracleVM());
   getIt.registerSingleton<ColorVM>(ColorVM());
+  getIt.registerSingleton<ItemVM>(ItemVM());
   runApp(new MyApp());
 }
 
