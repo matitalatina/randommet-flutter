@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/randomizers/color/ColorContainer.dart';
-import 'package:flutter_app/randomizers/oracle/OracleContainer.dart';
+import 'package:randommet2/randomizers/color/ColorContainer.dart';
+import 'package:randommet2/randomizers/oracle/OracleContainer.dart';
 
 void main() => runApp(new MyApp());
 
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       primarySwatch: Colors.purple,
     );
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'RandomMet',
       theme: theme,
       home: DefaultTabController(
         length: 2,

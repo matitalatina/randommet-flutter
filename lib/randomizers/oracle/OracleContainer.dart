@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/randomizers/oracle/OracleScreen.dart';
+import 'package:randommet2/randomizers/oracle/OracleScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OracleContainer extends StatefulWidget {
@@ -64,7 +64,7 @@ class _OracleContainerState extends State<OracleContainer>
 
   @override
   Widget build(BuildContext context) {
-    return new OracleScreen(
+    return OracleScreen(
       response: this._chosen,
       onChangeResponse: _changeResponse(context),
       animationController: animationController,

@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/randomizers/oracle/OracleScreen.dart';
+import 'package:randommet2/randomizers/oracle/OracleScreen.dart';
 import 'package:tuple/tuple.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -61,7 +61,7 @@ class _ColorContainerState extends State<ColorContainer>
 
   @override
   Widget build(BuildContext context) {
-    return new OracleScreen(
+    return OracleScreen(
       response: this._chosen,
       onChangeResponse: _changeResponse,
       animationController: animationController,
