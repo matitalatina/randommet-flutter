@@ -1,87 +1,31 @@
 import 'dart:math';
+import 'dart:ui';
 
-import 'package:flutter/material.dart';
-import 'package:randommet2/randomizers/oracle/OracleScreen.dart';
-import 'package:tuple/tuple.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:rxdart/rxdart.dart';
 
-class ColorContainer extends StatefulWidget {
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
+class NamedColor {
+  final String name;
+  final Color color;
 
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  @override
-  _ColorContainerState createState() => new _ColorContainerState();
+  NamedColor({this.name, this.color});
 }
 
-class _ColorContainerState extends State<ColorContainer>
-    with TickerProviderStateMixin {
-  String _chosen = 'New color!';
-  AnimationController animationController;
+class ColorState {
+  final NamedColor chosen;
 
-  static const String STORAGE_KEY = 'randomizers.color';
-  static const String CHOSEN_STORAGE_KEY = STORAGE_KEY + '.chosen';
-  static const String COLOR_STORAGE_KEY = STORAGE_KEY + '.color';
+  ColorState({this.chosen});
+}
 
-  Color backgroundColor;
+class ColorVM {
+  static final initialState = ColorState(chosen: _getColor());
+  BehaviorSubject<ColorState> _stateSubject = BehaviorSubject.seeded(initialState);
+  Observable<ColorState> get state$ => _stateSubject.stream;
 
-  _changeResponse() {
-    var color = _getColor();
-    animationController.forward().then((a) {
-      setState(() {
-        _chosen = color.item1;
-      });
-      animationController.reverse();
-    });
-    setState(() {
-      backgroundColor = color.item2;
-    });
+  choose() {
+    _stateSubject.add(ColorState(chosen: _getColor()));
   }
 
-
-  @override
-  void initState() {
-    super.initState();
-    SharedPreferences.getInstance().then((pref) {
-      setState(() {
-        backgroundColor = Color(pref.getInt(COLOR_STORAGE_KEY));
-        _chosen = pref.get(CHOSEN_STORAGE_KEY);
-      });
-    });
-    animationController = new AnimationController(
-      duration: new Duration(milliseconds: 700),
-      vsync: this,
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return OracleScreen(
-      response: this._chosen,
-      onChangeResponse: _changeResponse,
-      animationController: animationController,
-      backgroundColor: backgroundColor,
-      title: 'Color',
-    );
-  }
-
-
-  @override
-  void dispose() {
-    SharedPreferences.getInstance().then((pref) {
-      pref.setInt(COLOR_STORAGE_KEY, backgroundColor.value);
-      pref.setString(CHOSEN_STORAGE_KEY, _chosen);
-    });
-    animationController.dispose();
-    super.dispose();
-  }
-
-  Tuple2<String, Color> _getColor() {
+  static NamedColor _getColor() {
     List<Map<String, String>> colors = [{
       "name": "Lavender",
       "hex": 	"E6E6FA",
@@ -759,10 +703,10 @@ class _ColorContainerState extends State<ColorContainer>
 
     }];
     Map<String, String> color = colors[new Random().nextInt(colors.length)];
-    return Tuple2<String, Color>(color['name'], convertHex(color['hex']));
+    return NamedColor(name: color['name'], color: _convertHex(color['hex']));
   }
 
-  Color convertHex(String hex) {
+  static Color _convertHex(String hex) {
     String r = hex.substring(0, 2);
     String g = hex.substring(2, 4);
     String b = hex.substring(4, 6);
@@ -773,4 +717,5 @@ class _ColorContainerState extends State<ColorContainer>
         1.0
     );
   }
+
 }

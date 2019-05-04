@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class OracleScreen extends StatelessWidget {
+class ChooseScreen extends StatelessWidget {
   final String title;
   final String response;
   final Function onChangeResponse;
 
-  final Animation animationController;
+  final Animation<double> animation;
   final Color backgroundColor;
 
   @override
@@ -20,18 +20,15 @@ class OracleScreen extends StatelessWidget {
         new Center(child: new AnimatedContainer(duration: new Duration(milliseconds: 300), color: backgroundColor)),
         new Center(
           child: new ScaleTransition(
-            scale: Tween(begin: 1.0, end: 0.0).animate(new CurvedAnimation(
-                parent: animationController, curve: Curves.elasticIn
-            )),
+            scale: animation,
             child: new Text(
               response,
-              style: new TextStyle(fontSize: 30.0),
+              style: new TextStyle(fontSize: 30.0, color: backgroundColor.computeLuminance() > 0.5 ? Colors.black : Colors.white),
               textAlign: TextAlign.center,
             ),
           ),
         ),
       ]),
-      backgroundColor: backgroundColor,
       floatingActionButton: new FloatingActionButton(
         onPressed: onChangeResponse,
         tooltip: 'New Response',
@@ -40,10 +37,10 @@ class OracleScreen extends StatelessWidget {
     );
   }
 
-  OracleScreen(
+  ChooseScreen(
       {@required this.response,
       @required this.onChangeResponse,
-      @required this.animationController,
+      @required this.animation,
       @required this.backgroundColor,
       @required this.title});
 }

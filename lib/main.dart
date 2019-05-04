@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:randommet2/randomizers/color/ColorContainer.dart';
-import 'package:randommet2/randomizers/oracle/OracleContainer.dart';
+import 'package:get_it/get_it.dart';
+import 'package:randommet2/randomizers/color/ColorVM.dart';
+import 'package:randommet2/randomizers/oracle/OracleVM.dart';
+import 'package:randommet2/pages/TabsPage.dart';
 
-void main() => runApp(new MyApp());
+GetIt getIt = new GetIt();
+
+void main() {
+  getIt.registerSingleton<OracleVM>(OracleVM());
+  getIt.registerSingleton<ColorVM>(ColorVM());
+  runApp(new MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -17,27 +25,12 @@ class MyApp extends StatelessWidget {
       // "hot reload" (press "r" in the console where you ran "flutter run",
       // or press Run > Flutter Hot Reload in IntelliJ). Notice that the
       // counter didn't reset back to zero; the application is not restarted.
-      primarySwatch: Colors.purple,
+      primarySwatch: Colors.blue,
     );
     return MaterialApp(
       title: 'RandomMet',
       theme: theme,
-      home: DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          bottomNavigationBar: TabBar(
-            tabs: [
-              Tab(icon: Icon(Icons.remove_red_eye)),
-              Tab(icon: Icon(Icons.color_lens)),
-            ],
-            labelColor: theme.accentColor,
-          ),
-          body: TabBarView(children: [
-            OracleContainer(),
-            ColorContainer(),
-          ]),
-        ),
-      ),
+      home: TabsPage(),
     );
   }
 }
