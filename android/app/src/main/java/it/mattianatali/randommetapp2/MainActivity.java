@@ -1,4 +1,4 @@
-package it.mattianatali.flutterapp;
+package it.mattianatali.randommetapp2;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

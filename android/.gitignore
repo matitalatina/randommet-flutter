@@ -8,3 +8,13 @@
 /build
 /captures
 GeneratedPluginRegistrant.java
+
+fastlane/report.xml
+
+secrets/randommet-cd.json
+secrets/randommet.jks
+secrets/key.properties
+secrets/resource-secrets.xml
+
+secrets/secrets.tar
+app/src/main/res/values/secrets.xml
