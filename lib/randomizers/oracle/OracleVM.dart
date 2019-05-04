@@ -12,7 +12,7 @@ class OracleState {
 }
 
 class OracleVM {
-  static final OracleState initialState = OracleState(response: 'Hello!', color: Colors.white);
+  static final OracleState initialState = OracleState(response: 'Think a question, then ask Oracle the answer!', color: Colors.white);
   BehaviorSubject<OracleState> _response = BehaviorSubject.seeded(initialState);
   Observable<OracleState> get response$ => _response.stream;
   bool toggle = false;
@@ -25,7 +25,7 @@ class OracleVM {
     var responseList = _getResponseList();
     final newState = OracleState(
         response: responseList[new Random().nextInt(responseList.length)],
-        color: toggle ? Colors.white : Colors.blue
+        color: toggle ? Colors.white : Colors.black
     );
     toggle = !toggle;
     return newState;
