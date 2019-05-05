@@ -51,7 +51,7 @@ class ChooseScreen extends StatelessWidget {
       ]),
       floatingActionButton: new FloatingActionButton(
         onPressed: onChangeResponse,
-        tooltip: 'New Response',
+        tooltip: 'Choose!',
         child: new Icon(Icons.shuffle),
       ),
     );

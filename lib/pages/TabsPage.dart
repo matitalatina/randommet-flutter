@@ -13,7 +13,7 @@ class TabsPage extends StatelessWidget {
       child: Scaffold(
         bottomNavigationBar: TabBar(
           tabs: [
-            Tab(icon: Icon(Icons.list), text: "List"),
+            Tab(icon: Icon(Icons.list), text: "Item"),
             Tab(icon: Icon(Icons.remove_red_eye), text: "Oracle"),
             Tab(icon: Icon(Icons.color_lens), text: "Color"),
           ],
