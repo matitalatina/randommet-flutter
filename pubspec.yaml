@@ -8,7 +8,10 @@ dependencies:
   shared_preferences: ^0.5.2
   rxdart: ^0.22.0
   get_it: ^1.0.3
-  animated_background: ^1.0.1
+  animated_background:
+    git:
+      url: https://github.com/AndreBaltazar8/flutter_animated_background.git
+      ref: 10169a6bfbe0161295674f34bf1a39b4005954a4
   uuid: ^2.0.1
 
   # The following adds the Cupertino Icons font to your application.
