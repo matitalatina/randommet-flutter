@@ -4,7 +4,7 @@ const appItValues =  {
     'Tab.Oracle': 'Oracolo',
     'Tab.Color': 'Colore',
     'ColorPage.title': 'Colore',
-    'ChoosePage.title': 'Scegli elemento',
+    'ChoosePage.title': 'Elemento scelto',
     'ItemListPage.title': 'Elemento',
     'ItemListPage.add.tooltip': 'Aggiungi elemento',
     'ItemListPage.add.placeholder': 'Aggiungi un nuovo elemento',

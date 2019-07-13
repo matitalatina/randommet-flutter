@@ -11,7 +11,7 @@ class OraclePage extends StatelessWidget {
   Widget build(BuildContext context) {
     OracleVM oracleVM = getIt<OracleVM>();
     return SwapAnimator(
-      onSwap: () => oracleVM.choose(),
+      onSwap: () => oracleVM.choose(Localizations.localeOf(context)),
       builder: (BuildContext context, Animation<double> animation, TickerProvider tickerProvider,
           VoidCallback startAnimation) {
         return StreamBuilder<OracleState>(

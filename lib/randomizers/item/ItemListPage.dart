@@ -35,7 +35,7 @@ class _ItemListPageState extends State<ItemListPage> {
         ));
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Item"),
+        title: Text(l10n.itemListPageTitle),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),

@@ -3,6 +3,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:randommet2/i18n/AppL10n.dart';
+import 'package:randommet2/randomizers/oracle/repo/OracleEn.dart';
+import 'package:randommet2/randomizers/oracle/repo/OracleIt.dart';
 import 'package:rxdart/rxdart.dart';
 
 class OracleState {
@@ -21,12 +23,12 @@ class OracleVM {
     _response.add(OracleState(response: AppL10n(locale).oracleHelpText, color: Colors.white));
   }
 
-  choose() {
-    _response.add(_getNewResponse());
+  choose(Locale locale) {
+    _response.add(_getNewResponse(locale));
   }
 
-  OracleState _getNewResponse() {
-    var responseList = _getResponseList();
+  OracleState _getNewResponse(Locale locale) {
+    var responseList = _getResponseList(locale);
     final newState = OracleState(
         response: responseList[new Random().nextInt(responseList.length)],
         color: toggle ? Colors.white : Colors.black
@@ -35,42 +37,10 @@ class OracleVM {
     return newState;
   }
 
-  List<String> _getResponseList() {
-    return [
-      {"label": "Signs point to yes."},
-      {"label": "Yes."},
-      {"label": "Without a doubt."},
-      {"label": "My sources say no."},
-      {"label": "As I see it, yes."},
-      {"label": "You may rely on it."},
-      {"label": "Concentrate and ask again."},
-      {"label": "Outlook not so good."},
-      {"label": "It is decidedly so."},
-      {"label": "Better not tell you now."},
-      {"label": "Very doubtful."},
-      {"label": "Yes, definitely."},
-      {"label": "It is certain."},
-      {"label": "Cannot predict now."},
-      {"label": "Most likely."},
-      {"label": "Ask again later."},
-      {"label": "My reply is no."},
-      {"label": "Outlook good."},
-      {"label": "Don't count on it."},
-      {"label": "Yes, in due time."},
-      {"label": "My sources say no."},
-      {"label": "Definitely not."},
-      {"label": "Yes."},
-      {"label": "You will have to wait."},
-      {"label": "I have my doubts."},
-      {"label": "Outlook so so."},
-      {"label": "Looks good to me!"},
-      {"label": "Who knows?"},
-      {"label": "Looking good!"},
-      {"label": "Probably."},
-      {"label": "Are you kidding?"},
-      {"label": "Go for it!"},
-      {"label": "Don't bet on it."},
-      {"label": "Forget about it."}
-    ].map((e) => e['label']).toList();
+  List<String> _getResponseList(Locale locale) {
+    return {
+      ...oracleEn,
+      ...oracleIt,
+    }[locale.languageCode].map((e) => e['label']).toList();
   }
 }
