@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
+import 'package:randommet2/i18n/AppL10nDelegate.dart';
 import 'package:randommet2/randomizers/color/ColorVM.dart';
 import 'package:randommet2/randomizers/item/ItemVM.dart';
 import 'package:randommet2/randomizers/oracle/OracleVM.dart';
@@ -33,6 +35,19 @@ class MyApp extends StatelessWidget {
       title: 'RandomMet',
       theme: theme,
       home: TabsPage(),
+      localizationsDelegates: [
+        const AppLocalizationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en', ''),
+        const Locale('it', ''),
+      ],
+      localeResolutionCallback: (Locale locale, Iterable<Locale> supportedLocales){
+        getIt<ColorVM>().initialize(locale);
+        getIt<OracleVM>().initialize(locale);
+      },
     );
   }
 }

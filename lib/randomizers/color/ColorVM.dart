@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:randommet2/randomizers/color/ColorRandomizer.dart';
 import 'package:randommet2/randomizers/color/NamedColor.dart';
 import 'package:rxdart/rxdart.dart';
@@ -9,12 +11,15 @@ class ColorState {
 }
 
 class ColorVM {
-  static final initialState = ColorState(chosen: ColorRandomizer.getColor());
-  BehaviorSubject<ColorState> _stateSubject = BehaviorSubject.seeded(initialState);
+  BehaviorSubject<ColorState> _stateSubject = BehaviorSubject.seeded(null);
   Observable<ColorState> get state$ => _stateSubject.stream;
 
-  choose() {
-    _stateSubject.add(ColorState(chosen: ColorRandomizer.getColor()));
+  initialize(Locale locale) {
+    choose(locale);
+  }
+
+  choose(Locale locale) {
+    _stateSubject.add(ColorState(chosen: ColorRandomizer.getColor(locale)));
   }
 
 }

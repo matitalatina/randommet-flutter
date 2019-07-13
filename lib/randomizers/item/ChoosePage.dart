@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:randommet2/SwapAnimator.dart';
+import 'package:randommet2/i18n/AppL10n.dart';
 import 'package:randommet2/main.dart';
 import 'package:randommet2/randomizers/color/ColorRandomizer.dart';
 import 'package:randommet2/randomizers/item/ItemVM.dart';
@@ -27,8 +28,8 @@ class ChoosePage extends StatelessWidget {
                 response: snap.data?.name ?? '',
                 onChangeResponse: startAnimation,
                 animation: animation,
-                backgroundColor: ColorRandomizer.getColor().color,
-                title: 'Chosen item',
+                backgroundColor: ColorRandomizer.getColor(Localizations.localeOf(context)).color,
+                title: AppL10n.of(context).choosePageTitle,
                 tickerProvider: tickerProvider,
               );
             },

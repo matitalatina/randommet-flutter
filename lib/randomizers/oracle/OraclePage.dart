@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:randommet2/SwapAnimator.dart';
+import 'package:randommet2/i18n/AppL10n.dart';
 import 'package:randommet2/widgets/ChooseScreen.dart';
 import 'package:randommet2/randomizers/oracle/OracleVM.dart';
 
@@ -15,14 +16,16 @@ class OraclePage extends StatelessWidget {
           VoidCallback startAnimation) {
         return StreamBuilder<OracleState>(
             stream: oracleVM.response$,
-            initialData: OracleVM.initialState,
             builder: (BuildContext context, AsyncSnapshot<OracleState> snap) {
+              if (!snap.hasData) {
+                return Container();
+              }
               return ChooseScreen(
                 response: snap.data.response,
                 onChangeResponse: startAnimation,
                 animation: animation,
                 backgroundColor: snap.data.color,
-                title: 'Oracle',
+                title: AppL10n.of(context).oraclePageTitle,
                 tickerProvider: tickerProvider,
               );
             });

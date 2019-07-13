@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:animated_background/animated_background.dart';
+import 'package:randommet2/i18n/AppL10n.dart';
 
 class ChooseScreen extends StatelessWidget {
   final String title;
@@ -13,9 +14,8 @@ class ChooseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textColor = backgroundColor.computeLuminance() > 0.5
-        ? Colors.black
-        : Colors.white;
+    final textColor =
+        backgroundColor.computeLuminance() > 0.5 ? Colors.black : Colors.white;
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(title),
@@ -28,7 +28,8 @@ class ChooseScreen extends StatelessWidget {
                 color: backgroundColor)),
         new Center(
             child: AnimatedBackground(
-          behaviour: RandomParticleBehaviour(options: ParticleOptions().copyWith(
+          behaviour: RandomParticleBehaviour(
+              options: ParticleOptions().copyWith(
             baseColor: textColor,
             minOpacity: 0.05,
             maxOpacity: 0.2,
@@ -38,20 +39,21 @@ class ChooseScreen extends StatelessWidget {
           child: new Container(),
         )),
         new Center(
-            child: new ScaleTransition(
-          scale: animation,
-          child: new Text(
-            response,
-            style: new TextStyle(
-                fontSize: 30.0,
-                color: textColor),
-            textAlign: TextAlign.center,
+            child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: new ScaleTransition(
+            scale: animation,
+            child: new Text(
+              response,
+              style: new TextStyle(fontSize: 30.0, color: textColor),
+              textAlign: TextAlign.center,
+            ),
           ),
         )),
       ]),
       floatingActionButton: new FloatingActionButton(
         onPressed: onChangeResponse,
-        tooltip: 'Choose!',
+        tooltip: AppL10n.of(context).chooseScreenChooseTooltip,
         child: new Icon(Icons.shuffle),
       ),
     );

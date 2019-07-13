@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:randommet2/i18n/AppL10n.dart';
 import 'package:rxdart/rxdart.dart';
 
 class OracleState {
@@ -12,10 +13,13 @@ class OracleState {
 }
 
 class OracleVM {
-  static final OracleState initialState = OracleState(response: 'Think a question, then ask Oracle the answer!', color: Colors.white);
-  BehaviorSubject<OracleState> _response = BehaviorSubject.seeded(initialState);
+  BehaviorSubject<OracleState> _response = BehaviorSubject.seeded(null);
   Observable<OracleState> get response$ => _response.stream;
   bool toggle = false;
+
+  initialize(Locale locale) {
+    _response.add(OracleState(response: AppL10n(locale).oracleHelpText, color: Colors.white));
+  }
 
   choose() {
     _response.add(_getNewResponse());

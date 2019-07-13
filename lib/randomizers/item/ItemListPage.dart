@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:randommet2/i18n/AppL10n.dart';
 import 'package:randommet2/main.dart';
 import 'package:randommet2/randomizers/item/ChoosePage.dart';
 import 'package:randommet2/randomizers/item/ItemVM.dart';
@@ -25,6 +26,7 @@ class _ItemListPageState extends State<ItemListPage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppL10n.of(context);
     final iconTrashBack = Padding(
         padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 16.0),
         child: Icon(
@@ -37,7 +39,7 @@ class _ItemListPageState extends State<ItemListPage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
-            tooltip: "Add item",
+            tooltip: l10n.itemListPageAddTooltip,
             onPressed: _submitItem,
           )
         ],
@@ -52,7 +54,7 @@ class _ItemListPageState extends State<ItemListPage> {
                   child: TextFormField(
                     controller: _textController,
                     decoration: InputDecoration(
-                        labelText: 'Add new item',
+                        labelText: l10n.itemListPageAddPlaceholder,
                         hasFloatingPlaceholder: true,
                         icon: Icon(Icons.chevron_right),
                         contentPadding: EdgeInsets.all(16.0),
@@ -67,7 +69,7 @@ class _ItemListPageState extends State<ItemListPage> {
                                 : Container(width: 0.0, height: 0.0,);
                           },
                         )),
-                    validator: _validateItemName,
+                    validator: _validateItemName(context),
                     keyboardType: TextInputType.text,
                     textInputAction: TextInputAction.next,
                     onEditingComplete: _submitItem,
@@ -112,7 +114,7 @@ class _ItemListPageState extends State<ItemListPage> {
           builder: (context, snap) => snap.data.length > 0
               ? FloatingActionButton(
                   onPressed: () => _showChooseScreen(context),
-                  tooltip: 'Choose!',
+                  tooltip: l10n.itemListPageChooseTooltip,
                   child: Icon(Icons.shuffle),
                 )
               : Container(
@@ -146,12 +148,14 @@ class _ItemListPageState extends State<ItemListPage> {
     itemVM.remove(key);
   }
 
-  String _validateItemName(value) {
-    if (value.isEmpty) {
-      return 'Please enter some text';
-    }
+   ValueChanged<String> _validateItemName(BuildContext context) {
+    return (value) {
+      if (value.isEmpty) {
+        return AppL10n.of(context).itemListPageChooseEmptyTextError;
+      }
 
-    return null;
+      return null;
+    };
   }
 
   _showChooseScreen(BuildContext context) {
