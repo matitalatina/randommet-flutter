@@ -18,6 +18,7 @@ class ColorPage extends StatelessWidget {
             stream: colorVM.state$,
             builder: (BuildContext context, AsyncSnapshot<ColorState> snap) {
               if (!snap.hasData) {
+                colorVM.initialize(Localizations.localeOf(context));
                 return Container();
               }
               return ChooseScreen(

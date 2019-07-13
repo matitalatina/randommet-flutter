@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:randommet2/SwapAnimator.dart';
 import 'package:randommet2/i18n/AppL10n.dart';
-import 'package:randommet2/widgets/ChooseScreen.dart';
 import 'package:randommet2/randomizers/oracle/OracleVM.dart';
+import 'package:randommet2/widgets/ChooseScreen.dart';
 
 import '../../main.dart';
 
@@ -18,6 +18,7 @@ class OraclePage extends StatelessWidget {
             stream: oracleVM.response$,
             builder: (BuildContext context, AsyncSnapshot<OracleState> snap) {
               if (!snap.hasData) {
+                oracleVM.initialize(Localizations.localeOf(context));
                 return Container();
               }
               return ChooseScreen(
