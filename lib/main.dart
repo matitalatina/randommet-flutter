@@ -1,3 +1,5 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -9,6 +11,7 @@ import 'package:randommet2/randomizers/item/ItemVM.dart';
 import 'package:randommet2/randomizers/oracle/OracleVM.dart';
 
 GetIt getIt = new GetIt();
+FirebaseAnalytics analytics = FirebaseAnalytics();
 
 void main() {
   getIt.registerSingleton<OracleVM>(OracleVM());
@@ -35,6 +38,9 @@ class MyApp extends StatelessWidget {
       supportedLocales: [
         const Locale('en', ''),
         const Locale('it', ''),
+      ],
+      navigatorObservers: [
+        FirebaseAnalyticsObserver(analytics: analytics),
       ],
     );
   }
