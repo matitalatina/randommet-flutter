@@ -20,12 +20,6 @@ matrix:
             - $HOME/.gradle/wrapper/
             - $HOME/.android/build-cache
 
-
-cache:
-  directories:
-    - "$HOME/android/.gradle/caches/"
-    - "$HOME/android/.gradle/wrapper/"
-
 install:
   - export FLUTTER_PATH=$HOME/flutter/
   - git clone https://github.com/flutter/flutter.git -b stable $FLUTTER_PATH
